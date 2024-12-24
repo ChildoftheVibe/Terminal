@@ -1,0 +1,37 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('input');
+    const output = document.getElementById('output');
+
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const command = input.value.trim();
+            input.value = '';
+            handleCommand(command);
+        }
+    });
+
+    function handleCommand(command) {
+        output.innerHTML += `> ${command}\n`;
+        switch (command.toLowerCase()) {
+            case 'help':
+                output.innerHTML += 'Available commands: help, home, about, contact\n';
+                break;
+            case 'home':
+                window.location.href = '/';
+                break;
+            case 'about':
+                window.location.href = '/about';
+                break;
+            case 'contact':
+                window.location.href = '/contact';
+                break;
+            default:
+                output.innerHTML += `Unknown command: ${command}\n`;
+                break;
+        }
+        output.scrollTop = output.scrollHeight;
+    }
+
+    // Initial message
+    output.innerHTML = 'Welcome to the website terminal! Type "help" for a list of commands.\n';
+});
